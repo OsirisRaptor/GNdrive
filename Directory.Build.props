@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Configurations>Debug;Release</Configurations>
+    <Deterministic>true</Deterministic>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Set KSP reference directory via env var. Prefer KSP_DLL_DIR; fall back to KSP_DIR managed folder. -->
+    <KSPDllDir Condition=" '$(KSP_DLL_DIR)' != '' ">$(KSP_DLL_DIR)</KSPDllDir>
+    <KSPDllDir Condition=" '$(KSPDllDir)' == '' and '$(KSP_DIR)' != '' ">$(KSP_DIR)/KSP_x64_Data/Managed</KSPDllDir>
+
+    <!-- Use stubs when we don't have KSP assemblies available -->
+    <UseKspStubs Condition=" '$(KSPDllDir)' == '' ">true</UseKspStubs>
+    <UseKspStubs Condition=" '$(KSPDllDir)' != '' ">false</UseKspStubs>
+  </PropertyGroup>
+</Project>

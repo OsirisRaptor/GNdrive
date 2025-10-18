@@ -1,0 +1,49 @@
+# Build outputs
+bin/
+obj/
+[Bb]uild/
+.vs/
+*.user
+*.suo
+*.cache
+*.csproj.user
+
+# Rider / JetBrains
+.idea/
+*.iml
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Packages / temp
+packages/
+.nuget/
+*.nupkg
+*.snk
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# Unity/KSP
+Library/
+Temp/
+obj/
+UserSettings/
+.vscode/
+
+# Artifacts
+artifacts/
+Release/
+Debug/
+
+# Generated
+/GameData/GNDrive/Plugins/*.dll
+/GameData/GNDrive/Plugins/*.pdb
+/GameData/GNDrive/Plugins/*.mdb
+
+# Tools
+/.cursor/

@@ -20,7 +20,10 @@ namespace GNDrive.PartModules
         public override void OnStart(StartState state)
         {
             base.OnStart(state);
-            _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
+            if (part?.gameObject != null)
+            {
+                _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
+            }
         }
 
         public override void FixedUpdate()
@@ -37,7 +40,7 @@ namespace GNDrive.PartModules
             double ecNeeded = gnThisTick * ecPerGn;
 
             // attempt EC draw
-            double ecDrawn = -part.RequestResource("ElectricCharge", ecNeeded);
+            double ecDrawn = part.RequestResource("ElectricCharge", ecNeeded);
             if (ecDrawn > 0)
             {
                 double gnProduced = ecDrawn / Math.Max(1e-6, ecPerGn);

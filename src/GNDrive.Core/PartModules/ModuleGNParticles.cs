@@ -70,8 +70,8 @@ namespace GNDrive.PartModules
         /// <summary>
         /// Add to true/tau generation rates (called by drive modules).
         /// </summary>
-        public void AddTrueRate(double rate) => particleRateTrue += Math.Max(0, rate);
-        public void AddTauRate(double rate) => particleRateTau += Math.Max(0, rate);
+        public void AddTrueRate(double rate) => particleRateTrue += Math.Max(0.0, rate);
+        public void AddTauRate(double rate) => particleRateTau += Math.Max(0.0, rate);
 
         [KSPEvent(guiActive = true, guiActiveEditor = false, guiName = "Activate Trans-Am")]
         public void ActivateTransAm()
@@ -104,6 +104,11 @@ namespace GNDrive.PartModules
             base.FixedUpdate();
 
             double now = Planetarium.GetUniversalTime();
+            // Initialize on first FixedUpdate if OnStart hasn't run yet
+            if (_lastFixedTime == 0.0)
+            {
+                _lastFixedTime = now;
+            }
             double dt = Math.Max(0.0, now - _lastFixedTime);
             _lastFixedTime = now;
 

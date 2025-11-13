@@ -23,7 +23,10 @@ namespace GNDrive.PartModules
         public override void OnStart(StartState state)
         {
             base.OnStart(state);
-            _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
+            if (part?.gameObject != null)
+            {
+                _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
+            }
         }
 
         public override void FixedUpdate()

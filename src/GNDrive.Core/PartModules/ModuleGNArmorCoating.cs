@@ -26,10 +26,13 @@ namespace GNDrive.PartModules
         public override void OnStart(StartState state)
         {
             base.OnStart(state);
-            _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
-            _origBreakingForce = part.breakingForce;
-            _origBreakingTorque = part.breakingTorque;
-            _origCrashTolerance = part.crashTolerance;
+            if (part?.gameObject != null)
+            {
+                _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
+                _origBreakingForce = part.breakingForce;
+                _origBreakingTorque = part.breakingTorque;
+                _origCrashTolerance = part.crashTolerance;
+            }
         }
 
         public override void OnDestroy()

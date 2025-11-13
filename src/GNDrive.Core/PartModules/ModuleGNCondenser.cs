@@ -22,10 +22,13 @@ namespace GNDrive.PartModules
         public override void OnStart(StartState state)
         {
             base.OnStart(state);
-            _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
-            if (_agg != null)
+            if (part?.gameObject != null)
             {
-                _agg.particleCapacity += Math.Max(0.0, extraCapacity);
+                _agg = VesselServices.GetOrCreate(vessel.id, () => part.gameObject.AddComponent<ModuleGNParticles>());
+                if (_agg != null)
+                {
+                    _agg.particleCapacity += Math.Max(0.0, extraCapacity);
+                }
             }
         }
 
